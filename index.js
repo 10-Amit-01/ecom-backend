@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://next-cart-lovat-three.vercel.app',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
 app.use(cookieParser());
@@ -30,5 +30,5 @@ app.use('/', (req, res) => {
 connectDB();
 
 app.listen(PORT, () => {
-    console.log('server is running at 3000');
+    console.log('server is running at'+PORT);
 });

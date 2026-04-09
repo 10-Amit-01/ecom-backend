@@ -49,7 +49,7 @@ export async function login(req, res) {
 export async function googleAuth(req, res) {
     const user = req.user;
     if (!user) {
-        return res.redirect('http://localhost:5173/login?error=true');
+        return res.redirect(`${process.env.FRONTEND_URL}/login?error=true`);
     }
     const accessToken = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
     const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
@@ -67,7 +67,7 @@ export async function googleAuth(req, res) {
         image: user.profilePicture || user.image
     }));
 
-    res.redirect(`http://localhost:5173/google/callback?accessToken=${accessToken}&user=${userData}`);
+    res.redirect(`${process.env.FRONTEND_URL}/google/callback?accessToken=${accessToken}&user=${userData}`);
 }
 
 export async function logout(req, res) {
