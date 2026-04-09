@@ -13,7 +13,7 @@ import productRoutes from './routes/product.js';
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://next-cart-lovat-three.vercel.app',
     credentials: true,
 }));
 app.use(cookieParser());
