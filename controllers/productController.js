@@ -45,3 +45,24 @@ export const getProduct = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export async function getProductById(req, res) {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function getTrendingProducts(req, res){
+    try {
+        const products = await Product.find({
+            isActive: true
+        }).sort({createdAt: -1}).limit(8);
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
